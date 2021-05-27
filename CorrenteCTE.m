@@ -35,3 +35,6 @@ while (abs((Vc2-Vc1)/Vc2)>erro && aux<10000)
     aux++;
 end
 
+
+
+
