@@ -62,3 +62,7 @@ V_carga_linha = [
     V_carga_fase(2) - V_carga_fase(3)
     V_carga_fase(3) - V_carga_fase(1)
 ];
+
+%Correntes de linha na carga
+I_carga_linha = Y_carga*V_carga_linha;
+

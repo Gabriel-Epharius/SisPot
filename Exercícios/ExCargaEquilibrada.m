@@ -104,3 +104,26 @@ V_carga_linha = [
     V_carga_fase(2) - V_carga_fase(3)
     V_carga_fase(3) - V_carga_fase(1)
 ];
+
+%Correntes de linha na carga
+I_carga_linha = Y_carga*V_carga_linha;
+
+%Correntes de linha na fonte
+
+M_alfas = [
+    1   1   1
+    1   alfa**2    alfa
+    1   alfa    alfa**2
+];
+
+I_auxiliar = inv(M_alfas)*I_fase;
+
+fator = sqrt(3)*exp(-j*pi*30/180);
+
+M_auxiliar = [
+    fator   conj(fator)
+    fator*alfa**2 ,conj(fator)*alfa
+    fator*alfa , conj(fator)*alfa**2
+]/3;
+
+I_fonte_linha = M_auxiliar*I_auxiliar(2:3);
