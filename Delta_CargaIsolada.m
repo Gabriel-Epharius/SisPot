@@ -1,8 +1,6 @@
-%Carga
+%Carga Delta
 %PREENCHER
-Zab = 1;
-Zbc = 1;
-Zac = 1;
+Zab = Zbc = Zac = Z_delta;
 %%
 
 Zsoma = Zab + Zac + Zbc;
@@ -41,19 +39,26 @@ Y_t = eye(3) - Y_abc;
 
 %%PREENCHER
 Z_rede = [
-    1   j   1
-    1   1   1
-    j   j  1
+    Zp  0   0
+    0   Zp  0
+    0   0   Zp
 ];
 
 %Determinação correntes de fase
 I_fase = inv(Y_t*Z_rede + Z_carga)*Y_t*V_Y_positivo;
 
 %Tensão na carga
-V_carga = V_Y_positivo - Z_rede*I_fase;
+V_carga_fase = V_Y_positivo - Z_rede*I_fase;
 
 %Tensão do neutro da carga isolada
-Vnlinha_n = Y_abc*V_carga;
+Vnlinha_n = Y_abc*V_carga_fase;
 
 %Queda de Tensão na linha
-V_queda = V_Y_positivo - V_carga;
+V_queda = Z_rede*I_fase;
+
+%Tensão linha na carga
+V_carga_linha = [
+    V_carga_fase(1) - V_carga_fase(2)
+    V_carga_fase(2) - V_carga_fase(3)
+    V_carga_fase(3) - V_carga_fase(1)
+];
