@@ -4,6 +4,3 @@
     
 end
 
-function fasor(Z, R)
-    return Z*complex(cos(R*pi/180), sin(R*pi/180))
-end
